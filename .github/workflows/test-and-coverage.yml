@@ -1,0 +1,65 @@
+name: Run tests and upload coverage
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run tests and collect coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./nextjs-frontend
+
+      - name: Run tests
+        run: npx vitest run --coverage
+        working-directory: ./nextjs-frontend
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        working-directory: ./demo
+
+      - name: Build with Gradle
+        run: ./gradlew build
+        working-directory: ./demo
+
+      - name: Run tests with Gradle
+        run: ./gradlew test jacocoTestReport
+        working-directory: ./demo
+
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./demo/build/reports/jacoco/test/jacocoTestReport.xml
+          flags: backend
+          name: codecov-umbrella
+          fail_ci_if_error: true
+
+      - name: Upload frontend coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./nextjs-frontend/coverage/clover.xml
+          flags: frontend
+          name: codecov-umbrella
+          fail_ci_if_error: true
