@@ -3,45 +3,58 @@ coverage:
     project:
       default:
         target: 85%
+    component:
+      default:
+        target: auto
+        threshold: 1%
+      domain:
+        target: 95%
+      application:
+        target: 90%
+      infrastructure:
+        target: 80%
+      presentation:
+        target: 85%
 
 component_management:
   default_rules:
     statuses:
       - type: project
-        target: 85%
+        target: auto
+        threshold: 1%
 
   individual_components:
     - component_id: domain
       name: Domain Layer
-      paths: ["demo/src/main/java/com/example/demo/domain/**"]
+      paths: 
+        - "demo/src/main/java/com/example/demo/domain/**"
       statuses:
         - type: project
           target: 95%
-          informational: false
 
     - component_id: application
       name: Application Layer
-      paths: ["demo/src/main/java/com/example/demo/application/**"]
+      paths: 
+        - "demo/src/main/java/com/example/demo/application/**"
       statuses:
         - type: project
           target: 90%
-          informational: false
 
     - component_id: infrastructure
       name: Infrastructure Layer
-      paths: ["demo/src/main/java/com/example/demo/infrastructure/**"]
+      paths: 
+        - "demo/src/main/java/com/example/demo/infrastructure/**"
       statuses:
         - type: project
           target: 80%
-          informational: false
 
     - component_id: presentation
       name: Presentation Layer
-      paths: ["demo/src/main/java/com/example/demo/presentation/**"]
+      paths: 
+        - "demo/src/main/java/com/example/demo/presentation/**"
       statuses:
         - type: project
           target: 85%
-          informational: false
 
 # パッチカバレッジの設定
 patch:
@@ -58,9 +71,10 @@ ignore:
 
 # Pull Requestのコメント設定
 comment:
-  layout: "reach, diff, components"
+  layout: "header, diff, flags, components, footer"
   behavior: "default"
   require_changes: false
-  require_base: false
+  require_base: true
   require_head: true
-  show_carryforward_flags: true 
+  show_carryforward_flags: true
+  hide_project_coverage: false 
