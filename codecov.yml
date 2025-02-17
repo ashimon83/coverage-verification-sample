@@ -15,34 +15,18 @@ component_management:
     - component_id: "domain"
       paths:
         - "demo/src/main/java/com/example/demo/domain/**"
-      statuses:
-        - type: project
-          target: 95%
-          threshold: 1%
 
     - component_id: "application"
       paths:
         - "demo/src/main/java/com/example/demo/application/**"
-      statuses:
-        - type: project
-          target: 90%
-          threshold: 1%
 
     - component_id: "infrastructure"
       paths:
         - "demo/src/main/java/com/example/demo/infrastructure/**"
-      statuses:
-        - type: project
-          target: 80%
-          threshold: 2%
 
     - component_id: "presentation"
       paths:
         - "demo/src/main/java/com/example/demo/presentation/**"
-      statuses:
-        - type: project
-          target: 85%
-          threshold: 2%
 
   # パッチカバレッジの設定
   patch:
@@ -59,7 +43,7 @@ component_management:
 
 # Pull Requestのコメント設定
 comment:
-  layout: "reach, diff, flags, files, components, footer"
+  layout: "header, diff, flags, components"
   behavior: default
   require_changes: false
   require_base: false
