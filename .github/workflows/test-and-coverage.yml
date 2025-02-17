@@ -64,6 +64,9 @@ jobs:
           flags: backend
           name: codecov-umbrella
           fail_ci_if_error: true
+          verbose: true
+          override_commit: ${{ github.sha }}
+          root_dir: ./demo
 
       - name: Upload frontend coverage to Codecov
         uses: codecov/codecov-action@v5
@@ -73,3 +76,6 @@ jobs:
           flags: frontend
           name: codecov-umbrella
           fail_ci_if_error: true
+          verbose: true
+          override_commit: ${{ github.sha }}
+          root_dir: ./nextjs-frontend

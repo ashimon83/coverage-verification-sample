@@ -12,28 +12,36 @@ component_management:
 
   individual_components:
     - component_id: domain
-      paths: ["src/main/java/com/example/demo/domain/**"]
+      name: Domain Layer
+      paths: ["demo/src/main/java/com/example/demo/domain/**"]
       statuses:
         - type: project
           target: 95%
+          informational: false
 
     - component_id: application
-      paths: ["src/main/java/com/example/demo/application/**"]
+      name: Application Layer
+      paths: ["demo/src/main/java/com/example/demo/application/**"]
       statuses:
         - type: project
           target: 90%
+          informational: false
 
     - component_id: infrastructure
-      paths: ["src/main/java/com/example/demo/infrastructure/**"]
+      name: Infrastructure Layer
+      paths: ["demo/src/main/java/com/example/demo/infrastructure/**"]
       statuses:
         - type: project
           target: 80%
+          informational: false
 
     - component_id: presentation
-      paths: ["src/main/java/com/example/demo/presentation/**"]
+      name: Presentation Layer
+      paths: ["demo/src/main/java/com/example/demo/presentation/**"]
       statuses:
         - type: project
           target: 85%
+          informational: false
 
 # パッチカバレッジの設定
 patch:
@@ -50,10 +58,9 @@ ignore:
 
 # Pull Requestのコメント設定
 comment:
-  layout: "reach, diff, flags, files, components, footer"
-  behavior: "new"
-  require_changes: true
+  layout: "reach, diff, components"
+  behavior: "default"
+  require_changes: false
   require_base: false
   require_head: true
-  show_carryforward_flags: true
-  hide_project_coverage: false 
+  show_carryforward_flags: true 
