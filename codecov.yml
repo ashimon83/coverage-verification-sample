@@ -3,18 +3,10 @@ coverage:
     project:
       default:
         target: 85%
-    component:
+    patch:
       default:
-        target: auto
-        threshold: 1%
-      domain:
-        target: 95%
-      application:
         target: 90%
-      infrastructure:
-        target: 80%
-      presentation:
-        target: 85%
+        threshold: 1%
 
 component_management:
   default_rules:
@@ -31,6 +23,7 @@ component_management:
       statuses:
         - type: project
           target: 95%
+          threshold: 1%
 
     - component_id: application
       name: Application Layer
@@ -39,6 +32,7 @@ component_management:
       statuses:
         - type: project
           target: 90%
+          threshold: 1%
 
     - component_id: infrastructure
       name: Infrastructure Layer
@@ -47,6 +41,7 @@ component_management:
       statuses:
         - type: project
           target: 80%
+          threshold: 1%
 
     - component_id: presentation
       name: Presentation Layer
@@ -55,12 +50,7 @@ component_management:
       statuses:
         - type: project
           target: 85%
-
-# パッチカバレッジの設定
-patch:
-  default:
-    target: 90%
-    threshold: 1%
+          threshold: 1%
 
 # カバレッジレポートから除外するファイル
 ignore:
@@ -71,10 +61,9 @@ ignore:
 
 # Pull Requestのコメント設定
 comment:
-  layout: "header, diff, flags, components, footer"
+  layout: "header, diff, components"
   behavior: "default"
   require_changes: false
   require_base: true
   require_head: true
-  show_carryforward_flags: true
-  hide_project_coverage: false 
+  show_carryforward_flags: true 
