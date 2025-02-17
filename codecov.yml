@@ -9,41 +9,48 @@ component_management:
     statuses:
       - type: project
         target: 85%
-        threshold: 2%
 
   individual_components:
-    - component_id: "domain"
-      paths:
-        - "demo/src/main/java/com/example/demo/domain/**"
+    - component_id: domain
+      paths: ["src/main/java/com/example/demo/domain/**"]
+      statuses:
+        - type: project
+          target: 95%
 
-    - component_id: "application"
-      paths:
-        - "demo/src/main/java/com/example/demo/application/**"
+    - component_id: application
+      paths: ["src/main/java/com/example/demo/application/**"]
+      statuses:
+        - type: project
+          target: 90%
 
-    - component_id: "infrastructure"
-      paths:
-        - "demo/src/main/java/com/example/demo/infrastructure/**"
+    - component_id: infrastructure
+      paths: ["src/main/java/com/example/demo/infrastructure/**"]
+      statuses:
+        - type: project
+          target: 80%
 
-    - component_id: "presentation"
-      paths:
-        - "demo/src/main/java/com/example/demo/presentation/**"
+    - component_id: presentation
+      paths: ["src/main/java/com/example/demo/presentation/**"]
+      statuses:
+        - type: project
+          target: 85%
 
-  # パッチカバレッジの設定
-  patch:
-    default:
-      target: 90%
-      threshold: 1%
+# パッチカバレッジの設定
+patch:
+  default:
+    target: 90%
+    threshold: 1%
 
-  # カバレッジレポートから除外するファイル
-  ignore:
-    - "**/config/**"
-    - "**/exception/**"
-    - "**/*Configuration.java"
-    - "**/*Properties.java"
+# カバレッジレポートから除外するファイル
+ignore:
+  - "**/config/**"
+  - "**/exception/**"
+  - "**/*Configuration.java"
+  - "**/*Properties.java"
 
 # Pull Requestのコメント設定
 comment:
-  layout: "header, diff, flags, components"
+  layout: "header, diff, components"
   behavior: default
   require_changes: false
   require_base: false
