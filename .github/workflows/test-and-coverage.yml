@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  test:
+  run:
     name: Run tests and collect coverage
     runs-on: ubuntu-latest
     steps:
@@ -62,6 +62,18 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: build/reports/jacoco/test/jacocoTestReport.xml
           flags: backend
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
+          override_commit: ${{ github.sha }}
+          working-directory: ./demo
+
+      # フラグなしでのアップロード
+      - name: Upload results to Codecov (without flags)
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: build/reports/jacoco/test/jacocoTestReport.xml
           name: codecov-umbrella
           fail_ci_if_error: true
           verbose: true
