@@ -19,7 +19,7 @@ component_management:
     - component_id: domain
       name: Domain Layer
       paths: 
-        - "demo/src/main/java/com/example/demo/domain/**"
+        - "demo/src/main/java/com/example/demo/domain/"
       statuses:
         - type: project
           target: 95%
@@ -28,7 +28,7 @@ component_management:
     - component_id: application
       name: Application Layer
       paths: 
-        - "demo/src/main/java/com/example/demo/application/**"
+        - "demo/src/main/java/com/example/demo/application/"
       statuses:
         - type: project
           target: 90%
@@ -37,7 +37,7 @@ component_management:
     - component_id: infrastructure
       name: Infrastructure Layer
       paths: 
-        - "demo/src/main/java/com/example/demo/infrastructure/**"
+        - "demo/src/main/java/com/example/demo/infrastructure/"
       statuses:
         - type: project
           target: 80%
@@ -46,7 +46,7 @@ component_management:
     - component_id: presentation
       name: Presentation Layer
       paths: 
-        - "demo/src/main/java/com/example/demo/presentation/**"
+        - "demo/src/main/java/com/example/demo/presentation/"
       statuses:
         - type: project
           target: 85%
@@ -61,7 +61,7 @@ ignore:
 
 # Pull Requestのコメント設定
 comment:
-  layout: "header, diff, components"
+  layout: "reach, diff, flags, files, footer, components"
   behavior: "default"
   require_changes: false
   require_base: true
