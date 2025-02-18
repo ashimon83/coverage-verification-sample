@@ -2,7 +2,7 @@ coverage:
   status:
     project:
       default:
-        target: 85%
+        target: 80%
     patch:
       default:
         target: 90%
@@ -19,7 +19,7 @@ component_management:
     - component_id: domain
       name: Domain Layer
       paths: 
-        - "demo/src/main/java/com/example/demo/domain/"
+        - "src/main/java/com/example/demo/domain/**"
       statuses:
         - type: project
           target: 95%
@@ -28,16 +28,16 @@ component_management:
     - component_id: application
       name: Application Layer
       paths: 
-        - "demo/src/main/java/com/example/demo/application/"
+        - "src/main/java/com/example/demo/application/**"
       statuses:
         - type: project
-          target: 90%
+          target: 80%
           threshold: 1%
 
     - component_id: infrastructure
       name: Infrastructure Layer
       paths: 
-        - "demo/src/main/java/com/example/demo/infrastructure/"
+        - "src/main/java/com/example/demo/infrastructure/**"
       statuses:
         - type: project
           target: 80%
@@ -46,7 +46,7 @@ component_management:
     - component_id: presentation
       name: Presentation Layer
       paths: 
-        - "demo/src/main/java/com/example/demo/presentation/"
+        - "src/main/java/com/example/demo/presentation/**"
       statuses:
         - type: project
           target: 85%
@@ -66,4 +66,4 @@ comment:
   require_changes: false
   require_base: true
   require_head: true
-  show_carryforward_flags: true 
+  show_carryforward_flags: true

@@ -12,6 +12,10 @@ public class Book {
     private final LocalDateTime createdAt;
 
     public Book(Long id, String title, String author, ISBN isbn, Price price) {
+        this(id, title, author, isbn, price, LocalDateTime.now());
+    }
+
+    public Book(Long id, String title, String author, ISBN isbn, Price price, LocalDateTime createdAt) {
         this.validateTitle(title);
         this.validateAuthor(author);
         
@@ -20,7 +24,7 @@ public class Book {
         this.author = author;
         this.isbn = Objects.requireNonNull(isbn);
         this.price = Objects.requireNonNull(price);
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = Objects.requireNonNull(createdAt);
     }
 
     private void validateTitle(String title) {
