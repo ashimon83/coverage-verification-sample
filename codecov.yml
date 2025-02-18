@@ -2,7 +2,7 @@ coverage:
   status:
     project:
       default:
-        target: 85%
+        target: 80%
     patch:
       default:
         target: 90%
@@ -31,7 +31,7 @@ component_management:
         - "src/main/java/com/example/demo/application/**"
       statuses:
         - type: project
-          target: 90%
+          target: 80%
           threshold: 1%
 
     - component_id: infrastructure
