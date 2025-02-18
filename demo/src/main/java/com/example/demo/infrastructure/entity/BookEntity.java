@@ -43,7 +43,8 @@ public class BookEntity {
             title,
             author,
             new ISBN(isbn),
-            new Price(price)
+            new Price(price),
+            createdAt
         );
     }
 
