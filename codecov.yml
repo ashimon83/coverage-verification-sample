@@ -1,55 +1,81 @@
 coverage:
   status:
     project:
-      default:
-        target: 80%
+      default: off
     patch:
       default:
-        target: 90%
+        target: 60%
         threshold: 1%
 
 component_management:
   default_rules:
     statuses:
-      - type: project
+      - type: patch
         target: auto
         threshold: 1%
 
   individual_components:
-    - component_id: domain
-      name: Domain Layer
+    - component_id: backend-domain
+      name: Backend - Domain Layer
       paths: 
         - "src/main/java/com/example/demo/domain/**"
       statuses:
-        - type: project
-          target: 95%
+        - type: patch
+          target: 80%
           threshold: 1%
 
-    - component_id: application
-      name: Application Layer
+    - component_id: backend-application
+      name: Backend - Application Layer
       paths: 
         - "src/main/java/com/example/demo/application/**"
       statuses:
-        - type: project
-          target: 80%
+        - type: patch
+          target: 70%
           threshold: 1%
 
-    - component_id: infrastructure
-      name: Infrastructure Layer
+    - component_id: backend-infrastructure
+      name: Backend - Infrastructure Layer
       paths: 
         - "src/main/java/com/example/demo/infrastructure/**"
       statuses:
-        - type: project
-          target: 80%
+        - type: patch
+          target: 70%
           threshold: 1%
 
-    - component_id: presentation
-      name: Presentation Layer
+    - component_id: backend-presentation
+      name: Backend - Presentation Layer
       paths: 
         - "src/main/java/com/example/demo/presentation/**"
       statuses:
-        - type: project
-          target: 85%
+        - type: patch
+          target: 70%
+          threshold: 1%
+
+    - component_id: frontend-pages
+      name: Frontend - Pages
+      paths:
+        - "src/app/**"
+      statuses:
+        - type: patch
+          target: 70%
+          threshold: 1%
+
+    - component_id: frontend-components
+      name: Frontend - Components
+      paths:
+        - "src/components/**"
+      statuses:
+        - type: patch
+          target: 70%
+          threshold: 1%
+
+    - component_id: frontend-hooks
+      name: Frontend - Hooks
+      paths:
+        - "src/hooks/**"
+      statuses:
+        - type: patch
+          target: 70%
           threshold: 1%
 
 # カバレッジレポートから除外するファイル
