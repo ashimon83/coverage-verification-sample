@@ -1,5 +1,6 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { BookList } from './BookList';
 import { useBooks } from '../hooks/useBooks';
 
@@ -69,5 +70,54 @@ describe('BookList', () => {
       expect(screen.getByText('テスト駆動開発')).toBeInTheDocument();
       expect(screen.getByText('著者: Kent Beck')).toBeInTheDocument();
     });
+  });
+
+  it('書籍が0件の場合、メッセージが表示される', () => {
+    vi.mocked(useBooks).mockReturnValue({
+      books: [],
+      loading: false,
+      error: null,
+      fetchBooks: vi.fn(),
+      createBook: vi.fn(),
+      updateBook: vi.fn(),
+      deleteBook: vi.fn(),
+    });
+
+    render(<BookList />);
+    expect(screen.getByText('書籍がありません')).toBeInTheDocument();
+  });
+
+  it('書籍を削除できる', async () => {
+    const mockDeleteBook = vi.fn();
+    const mockBooks = [
+      {
+        id: 1,
+        title: 'テスト駆動開発',
+        author: 'Kent Beck',
+        isbn: '978-4-274-21788-7',
+        price: 3300,
+        createdAt: '2024-02-18T00:00:00.000Z',
+      },
+    ];
+
+    vi.mocked(useBooks).mockReturnValue({
+      books: mockBooks,
+      loading: false,
+      error: null,
+      fetchBooks: vi.fn(),
+      createBook: vi.fn(),
+      updateBook: vi.fn(),
+      deleteBook: mockDeleteBook,
+    });
+
+    render(<BookList />);
+    
+    const deleteButton = screen.getByRole('button', { name: '削除' });
+    expect(deleteButton).toBeInTheDocument();
+
+    await userEvent.click(deleteButton);
+    
+    expect(mockDeleteBook).toHaveBeenCalledWith(1);
+    expect(mockDeleteBook).toHaveBeenCalledTimes(1);
   });
 }); 

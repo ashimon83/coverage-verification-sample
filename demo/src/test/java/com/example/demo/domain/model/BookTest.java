@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -104,5 +105,39 @@ class BookTest {
     @Test
     void 価格更新時にnullを指定すると例外がスローされる() {
         assertThrows(NullPointerException.class, () -> book.updatePrice(null));
+    }
+
+    @Test
+    void タイトル更新時に無効な値を指定すると例外がスローされる() {
+        assertAll(
+            () -> assertThrows(IllegalArgumentException.class, () -> book.updateTitle(null)),
+            () -> assertThrows(IllegalArgumentException.class, () -> book.updateTitle("")),
+            () -> assertThrows(IllegalArgumentException.class, () -> book.updateTitle(" ")),
+            () -> assertThrows(IllegalArgumentException.class, () -> book.updateTitle("a".repeat(101)))
+        );
+    }
+
+    @Test
+    void 著者名更新時に無効な値を指定すると例外がスローされる() {
+        assertAll(
+            () -> assertThrows(IllegalArgumentException.class, () -> book.updateAuthor(null)),
+            () -> assertThrows(IllegalArgumentException.class, () -> book.updateAuthor("")),
+            () -> assertThrows(IllegalArgumentException.class, () -> book.updateAuthor(" ")),
+            () -> assertThrows(IllegalArgumentException.class, () -> book.updateAuthor("a".repeat(51)))
+        );
+    }
+
+    @Test
+    void 同じ内容の本は等価と判定される() {
+        Book book1 = new Book(1L, "テスト駆動開発", "Kent Beck", new ISBN("978-4-274-21788-7"), new Price(new BigDecimal("3300")));
+        Book book2 = new Book(1L, "テスト駆動開発", "Kent Beck", new ISBN("978-4-274-21788-7"), new Price(new BigDecimal("3300")));
+        Book differentBook = new Book(2L, "リファクタリング", "Martin Fowler", new ISBN("978-4-274-21788-7"), new Price(new BigDecimal("4400")));
+
+        assertAll(
+            () -> assertEquals(book1, book2),
+            () -> assertEquals(book1.hashCode(), book2.hashCode()),
+            () -> assertNotEquals(book1, differentBook),
+            () -> assertNotEquals(book1.hashCode(), differentBook.hashCode())
+        );
     }
 } 
