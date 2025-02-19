@@ -56,7 +56,9 @@ const BookCard = ({ book, onDelete }: BookCardProps) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-4">
       <h2 className="text-xl font-semibold mb-2">{book.title}</h2>
-      <p className="text-gray-600 mb-2">著者: {book.author}</p>
+      <p className="text-gray-600 mb-2" data-testid="author">
+        著者: {book.author}
+      </p>
       <p className="text-gray-600 mb-2">ISBN: {book.isbn}</p>
       <p className="text-gray-600 mb-2">価格: {formatPrice(book.price)}</p>
       <p className="text-gray-600 mb-4">登録日: {formatDate(book.createdAt)}</p>

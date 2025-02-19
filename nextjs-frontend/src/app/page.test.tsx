@@ -3,11 +3,19 @@ import { render, screen } from '@testing-library/react';
 import Home from './page';
 
 describe('Home', () => {
-  it('renders a heading', () => {
+  it('メインヘッダーが表示される', () => {
     render(<Home />);
     const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
+      name: /書籍管理システム/i,
     });
     expect(heading).toBeInTheDocument();
+  });
+
+  it('書籍追加フォームが表示される', () => {
+    render(<Home />);
+    const formHeading = screen.getByRole('heading', {
+      name: /書籍の追加/i,
+    });
+    expect(formHeading).toBeInTheDocument();
   });
 });
