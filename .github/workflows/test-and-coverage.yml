@@ -71,19 +71,6 @@ jobs:
           override_commit: ${{ github.sha }}
           working-directory: ./demo
 
-      # フラグなしでのアップロード
-      - name: Upload results to Codecov (without flags)
-        uses: codecov/codecov-action@v5
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        with:
-          files: build/reports/jacoco/test/jacocoTestReport.xml
-          name: codecov-umbrella
-          fail_ci_if_error: true
-          verbose: true
-          override_commit: ${{ github.sha }}
-          working-directory: ./demo
-
       - name: Upload frontend coverage to Codecov
         uses: codecov/codecov-action@v5
         env:
