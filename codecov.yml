@@ -95,3 +95,6 @@ comment:
   require_base: true
   require_head: true
   show_carryforward_flags: true
+  hide_project_coverage: false
+  after_n_builds: 1
+  hide: false
