@@ -54,7 +54,7 @@ component_management:
     - component_id: frontend-pages
       name: Frontend - Pages
       paths:
-        - "nextjs-frontend/src/app/**"
+        - "src/app/**"
       statuses:
         - type: patch
           target: 70%
@@ -63,7 +63,7 @@ component_management:
     - component_id: frontend-components
       name: Frontend - Components
       paths:
-        - "nextjs-frontend/src/components/**"
+        - "src/components/**"
       statuses:
         - type: patch
           target: 70%
@@ -72,7 +72,7 @@ component_management:
     - component_id: frontend-hooks
       name: Frontend - Hooks
       paths:
-        - "nextjs-frontend/src/hooks/**"
+        - "src/hooks/**"
       statuses:
         - type: patch
           target: 70%
