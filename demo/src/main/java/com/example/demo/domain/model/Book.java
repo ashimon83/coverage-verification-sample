@@ -66,4 +66,22 @@ public class Book {
     public ISBN getIsbn() { return isbn; }
     public Price getPrice() { return price; }
     public LocalDateTime getCreatedAt() { return createdAt; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id) &&
+               Objects.equals(title, book.title) &&
+               Objects.equals(author, book.author) &&
+               Objects.equals(isbn, book.isbn) &&
+               Objects.equals(price, book.price) &&
+               Objects.equals(createdAt, book.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, author, isbn, price, createdAt);
+    }
 } 

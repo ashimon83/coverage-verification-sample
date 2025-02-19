@@ -1,6 +1,7 @@
 package com.example.demo.domain.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -129,9 +130,10 @@ class BookTest {
 
     @Test
     void 同じ内容の本は等価と判定される() {
-        Book book1 = new Book(1L, "テスト駆動開発", "Kent Beck", new ISBN("978-4-274-21788-7"), new Price(new BigDecimal("3300")));
-        Book book2 = new Book(1L, "テスト駆動開発", "Kent Beck", new ISBN("978-4-274-21788-7"), new Price(new BigDecimal("3300")));
-        Book differentBook = new Book(2L, "リファクタリング", "Martin Fowler", new ISBN("978-4-274-21788-7"), new Price(new BigDecimal("4400")));
+        LocalDateTime now = LocalDateTime.now();
+        Book book1 = new Book(1L, "テスト駆動開発", "Kent Beck", new ISBN("978-4-274-21788-7"), new Price(new BigDecimal("3300")), now);
+        Book book2 = new Book(1L, "テスト駆動開発", "Kent Beck", new ISBN("978-4-274-21788-7"), new Price(new BigDecimal("3300")), now);
+        Book differentBook = new Book(2L, "リファクタリング", "Martin Fowler", new ISBN("978-4-274-21788-7"), new Price(new BigDecimal("4400")), now);
 
         assertAll(
             () -> assertEquals(book1, book2),
