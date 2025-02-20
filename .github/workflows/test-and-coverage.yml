@@ -37,55 +37,55 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './nextjs-frontend/package-lock.json'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: ./nextjs-frontend
 
-      - name: Run tests
+      - name: Run frontend tests with coverage
         run: npx vitest run --coverage
         working-directory: ./nextjs-frontend
 
-      - name: Build frontend
-        run: npm run build
+      - name: Check coverage files
+        run: |
+          echo "Frontend coverage files:"
+          ls -la coverage/
         working-directory: ./nextjs-frontend
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-        working-directory: ./demo
-
-      - name: Build with Gradle
-        run: ./gradlew build
-        working-directory: ./demo
-
-      - name: Run tests with Gradle
-        run: ./gradlew test jacocoTestReport
-        working-directory: ./demo
-
-      - name: Upload results to Codecov
-        uses: codecov/codecov-action@v5
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        with:
-          files: build/reports/jacoco/test/jacocoTestReport.xml
-          flags: backend
-          name: codecov-umbrella
-          fail_ci_if_error: false
-          verbose: true
-          override_commit: ${{ github.sha }}
-          working-directory: ./demo
 
       - name: Upload frontend coverage to Codecov
         uses: codecov/codecov-action@v5
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
-          files: coverage/clover.xml
+          files: ./nextjs-frontend/coverage/clover.xml
           flags: frontend
-          name: codecov-umbrella
-          fail_ci_if_error: false
+          name: frontend-coverage
+          fail_ci_if_error: true
           verbose: true
-          override_commit: ${{ github.sha }}
-          working-directory: ./nextjs-frontend
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        working-directory: ./demo
+
+      - name: Build and test backend with coverage
+        run: ./gradlew test jacocoTestReport
+        working-directory: ./demo
+
+      - name: Check backend coverage files
+        run: |
+          echo "Backend coverage files:"
+          ls -la build/reports/jacoco/test/
+        working-directory: ./demo
+
+      - name: Upload backend coverage to Codecov
+        uses: codecov/codecov-action@v5
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          files: ./demo/build/reports/jacoco/test/jacocoTestReport.xml
+          flags: backend
+          name: backend-coverage
+          fail_ci_if_error: true
+          verbose: true
