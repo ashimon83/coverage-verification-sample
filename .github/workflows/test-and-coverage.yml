@@ -65,6 +65,12 @@ jobs:
           fail_ci_if_error: true
           verbose: true
 
+      - name: Build frontend
+        run: npm run build
+        working-directory: ./nextjs-frontend
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
         working-directory: ./demo
