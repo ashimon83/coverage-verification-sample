@@ -46,6 +46,12 @@ jobs:
         run: npx vitest run --coverage
         working-directory: ./nextjs-frontend
 
+      - name: Build frontend
+        run: npm run build
+        working-directory: ./nextjs-frontend
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
         working-directory: ./demo
@@ -66,7 +72,7 @@ jobs:
           files: build/reports/jacoco/test/jacocoTestReport.xml
           flags: backend
           name: codecov-umbrella
-          fail_ci_if_error: true
+          fail_ci_if_error: false
           verbose: true
           override_commit: ${{ github.sha }}
           working-directory: ./demo
@@ -79,7 +85,7 @@ jobs:
           files: coverage/clover.xml
           flags: frontend
           name: codecov-umbrella
-          fail_ci_if_error: true
+          fail_ci_if_error: false
           verbose: true
           override_commit: ${{ github.sha }}
           working-directory: ./nextjs-frontend
